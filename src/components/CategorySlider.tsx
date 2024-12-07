@@ -19,7 +19,7 @@ const CategorySlider = ({
   icon?: ReactNode;
 }) => {
   return (
-    <>
+    <div className="overflow-hidden">
       {movies.length ? (
         <div className="mainContainer wrapper m-auto flex max-w-max_width flex-col gap-5 py-5 transition-all duration-500 lg:py-10">
           <div className="flex items-center justify-between">
@@ -55,7 +55,7 @@ const CategorySlider = ({
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ const VideoPlayer = ({ movie }: { movie: MovieType }) => {
     <div className="mainContainer m-auto mt-[80px] w-full max-w-max_width lg:mt-[130px]">
       <div className="relative w-full pt-[55%] md:pt-[50%] lg:pt-[40%]">
         {/* <div className="absolute left-0 top-0 h-full w-full scale-y-[1.04] bg-gradient-to-b from-black/70 via-gray-900/90 to-black" /> */}
-        <div className="gap- bg-red-30 absolute left-1/2 top-0 flex h-full max-h-max w-full -translate-x-1/2 items-center gap-5">
+        <div className="bg-red-30 absolute left-1/2 top-0 flex h-full w-full -translate-x-1/2 items-center gap-5">
           <Image
             src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : '/images/poster.jpg'}
             width={300}
@@ -35,7 +35,7 @@ const VideoPlayer = ({ movie }: { movie: MovieType }) => {
 
           <MediaPlayer
             title={movie.title}
-            className="group h-full cursor-pointer !rounded-lg"
+            className="group !h-full cursor-pointer !rounded-lg"
             src={`https://www.youtube.com/watch?v=${videoId}`}>
             <>
               <MediaProvider>

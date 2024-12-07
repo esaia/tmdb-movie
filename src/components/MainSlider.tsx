@@ -135,7 +135,7 @@ const MainSlider = ({ movies, genres }: { movies: MovieType[]; genres: { id: num
         <Image
           alt={activeMovie.title}
           src={`https://image.tmdb.org/t/p/original/${activeMovie?.backdrop_path}`}
-          width={700}
+          width={500}
           height={400}
           ref={backgroundImgRef}
           priority={true}

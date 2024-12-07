@@ -24,7 +24,7 @@ const Actors = ({ tmdbId }: { tmdbId: number }) => {
   }, []);
 
   return (
-    <>
+    <div className="overflow-hidden">
       {actors.length ? (
         <div className="mainContainer m-auto w-full max-w-max_width">
           <div className="mb-5 flex items-center gap-3">
@@ -58,7 +58,7 @@ const Actors = ({ tmdbId }: { tmdbId: number }) => {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 
