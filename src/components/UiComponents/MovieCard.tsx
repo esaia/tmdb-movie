@@ -1,23 +1,22 @@
-import { getCurrentDate } from '@/lib/requests';
-import { MovieType, SeriesType } from '@/types';
+import { generateSlug } from '@/lib/helpers';
+import { MovieType } from '@/types';
+import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IoPlay } from 'react-icons/io5';
 import { SiImdb } from 'react-icons/si';
-import { useGlobalStore } from '@/src/components/context/GlobaldataProvider';
-import { differenceInDays, format } from 'date-fns';
 
 const MovieCard = ({ movie }: { movie: MovieType }) => {
-  const { currentDate } = useGlobalStore();
-
   return (
-    <div className="group">
+    <Link href={`/movie/${generateSlug(movie)}`} className="group">
       <div className="relative w-full overflow-hidden rounded-lg pt-[140%]">
         <div className="group mb-4 h-fit overflow-hidden">
           <Image
             className="absolute left-0 top-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-125 group-hover:opacity-50 group-hover:blur-sm"
-            src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+            src={
+              movie.backdrop_path ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}` : '/images/poster.jpg'
+            }
             alt={movie.title}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             width={720}
@@ -51,7 +50,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
           {movie.title}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

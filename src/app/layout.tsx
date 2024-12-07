@@ -8,18 +8,12 @@ import Head from 'next/head';
 
 // Base styles for media player and provider (~400B).
 import '@vidstack/react/player/styles/base.css';
-import GlobalStoreProvider from '../components/context/GlobaldataProvider';
-
-// Font files can be colocated inside of `pages`
 
 export const metadata: Metadata = {
   title: {
-    default: 'ქრისტიანული ფილმები',
-    template: `%s | ქრისტიანული ფილმები`,
+    default: 'Movies',
+    template: `%s | Movies`,
   },
-  description: 'გთავაზობთ ქრისტიანულ ფილმებს ქართულად. kristianuli filmebi kartulad',
-  keywords: 'ქრისტიანული ფილმები, ქრისტიანული ფილმები ქართულად, ფილმები, ქართულად, ფილმები ქართულად',
-  alternates: { canonical: 'http://qmovies.net/' },
 };
 
 const myFont = localFont({
@@ -37,14 +31,12 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
       <body className={`${myFont.className} overflow-x-hidden bg-black text-white`}>
-        <GlobalStoreProvider>
-          <>
-            <div className="portal"></div>
-            <Header />
-            {children}
-            <Footer />
-          </>
-        </GlobalStoreProvider>
+        <>
+          <div className="portal"></div>
+          <Header />
+          {children}
+          <Footer />
+        </>
       </body>
     </html>
   );

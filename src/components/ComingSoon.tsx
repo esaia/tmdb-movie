@@ -157,7 +157,11 @@ const ComingSoon = ({ movies }: { movies: MovieType[] }) => {
                     <Image
                       width={200}
                       height={400}
-                      src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                      src={
+                        movie.backdrop_path
+                          ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                          : '/images/poster.jpg'
+                      }
                       alt={movie.title}
                       className="h-[200px] w-full flex-1 rounded-sm object-cover md:h-[400px] lg:h-[500px]"
                     />

@@ -1,49 +1,49 @@
 import { getIdFromSlug } from '@/lib/helpers';
-import { getAllGenres, getAllMovies, getSingleMovie } from '@/lib/requests';
+import { getMovies, getSingleMovie } from '@/lib/requests';
 import CategorySlider from '@/src/components/CategorySlider';
 import Actors from '@/src/components/singleView/Actors';
 import MovieDetail from '@/src/components/singleView/MovieDetail';
 import VideoPlayer from '@/src/components/singleView/VideoPlayer';
-import { MovieType, genreType, paginationMovie } from '@/types';
+import { MovieType } from '@/types';
 import { cache } from 'react';
 import { BiCameraMovie } from 'react-icons/bi';
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const movieId = getIdFromSlug(params.slug);
+  const movie: MovieType = await getItem(movieId);
+  return {
+    title: movie?.title,
+    description: movie?.overview,
+  };
+}
 
 const getItem = cache(async (id: number) => {
   const movie: MovieType = (await getSingleMovie(+id)) as MovieType;
   return movie;
 });
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const movieId = getIdFromSlug(params.slug);
-  const movie: MovieType = await getItem(movieId);
-  return {
-    title: movie.title_ka,
-    description: movie.description,
-    alternates: { canonical: `http://qmovies.net/movie/${movieId}` },
-  };
-}
+const fetchData = async () => {
+  const popularMovies = await getMovies('/movie/popular');
+
+  return popularMovies;
+};
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-  const [movies, movie, genres]: [movies: paginationMovie, movie: MovieType, genres: genreType[]] = await Promise.all([
-    getAllMovies({ taxonomy: 'trending' }),
-    (await getItem(getIdFromSlug(params.slug))) as MovieType,
-    getAllGenres(),
-  ]);
+  const movieId = getIdFromSlug(params.slug);
+
+  const movie = await getItem(movieId);
+  const popularMovies = await fetchData();
 
   return (
     <div className="flex flex-col gap-5 pb-5 lg:gap-10 lg:pb-10">
       <VideoPlayer movie={movie} />
-      <MovieDetail movie={movie} genres={genres} />
+      <MovieDetail movie={movie} />
 
-      {movie?.tmdb_id && <Actors tmdbId={movie?.tmdb_id} />}
+      <Actors tmdbId={movie?.id} />
 
-      {movies.data.length && (
+      {popularMovies.length && (
         <div className="[&_.wrapper]:py-0">
-          <CategorySlider
-            movies={movies.data.filter(movie => Number(movie.id) !== Number(getIdFromSlug(params.slug)))}
-            categoryTitle="ნახეთ კიდევ"
-            icon={<BiCameraMovie />}
-          />
+          <CategorySlider movies={popularMovies} categoryTitle="See more" icon={<BiCameraMovie />} />
         </div>
       )}
     </div>

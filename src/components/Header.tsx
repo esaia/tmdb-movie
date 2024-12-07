@@ -43,17 +43,17 @@ const Header = () => {
 
           <HeaderNavLink to="/">
             <RiMovie2Line />
-            <p className="py-4 text-sm">Home</p>
+            <p className="py-4">Home</p>
           </HeaderNavLink>
 
           <HeaderNavLink to="/movie">
             <MdMovieCreation />
-            <p className="py-4 text-sm">Movies</p>
+            <p className="py-4">Movies</p>
           </HeaderNavLink>
 
           <HeaderNavLink to="/serie">
             <MdOutlineLocalMovies />
-            <p className="py-4 text-sm">Series</p>
+            <p className="py-4">Series</p>
           </HeaderNavLink>
         </div>
       </div>

@@ -31,7 +31,7 @@ const Actors = ({ tmdbId }: { tmdbId: number }) => {
             <div className="title rounded-full bg-secondary p-2 lg:p-3">
               <FaTheaterMasks />
             </div>
-            <h3 className="title uppercase">მსახიობები</h3>
+            <h3 className="title uppercase">Casts</h3>
           </div>
 
           <Swiper slidesPerView={'auto'} speed={1000} grabCursor={true} className="!overflow-visible">

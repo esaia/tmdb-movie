@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import Button from '@/src/components/UiComponents/Button';
@@ -13,11 +13,10 @@ import 'swiper/css/autoplay';
 
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import Link from 'next/link';
-import { MovieType, Taxonomy } from '@/types';
+import { MovieType } from '@/types';
 import { generateSlug } from '@/lib/helpers';
-import { format } from 'date-fns';
 
-const MainSlider = ({ movies }: { movies: MovieType[] }) => {
+const MainSlider = ({ movies, genres }: { movies: MovieType[]; genres: { id: number; name: string }[] }) => {
   const [activeMovie, setactiveMovie] = useState<MovieType>(movies[1]);
   const animationDiv = useRef<HTMLDivElement | null>(null);
   const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -28,6 +27,10 @@ const MainSlider = ({ movies }: { movies: MovieType[] }) => {
   const isMountingRef = useRef(false);
 
   const [isAnimating, setisAnimating] = useState(false);
+
+  const activeMovieGenres = useMemo(() => {
+    return genres.filter((genre: any) => activeMovie.genre_ids.includes(genre?.id));
+  }, [activeMovie]);
 
   useEffect(() => {
     setCount(count => count + 1);
@@ -88,6 +91,19 @@ const MainSlider = ({ movies }: { movies: MovieType[] }) => {
                   <p>{format(activeMovie.release_date, 'y')}</p>
                 </div> */}
               </div>
+
+              {activeMovieGenres.length ? (
+                <div className="flex items-center gap-1">
+                  {activeMovieGenres.map((genre: any) => (
+                    <p key={genre?.id} className="rounded-md p-1 text-sm text-white/90 underline">
+                      {genre?.name}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <></>
+              )}
+
               <p className="line-clamp-3 text-sm opacity-90 lg:line-clamp-4">{activeMovie?.overview}</p>
 
               <Link href={`movie/${generateSlug(activeMovie)}`}>

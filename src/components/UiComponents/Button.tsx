@@ -44,6 +44,14 @@ const Button = ({
           {title}
         </button>
       )}
+
+      {type === 4 && (
+        <button
+          className="rounded-full border-2 border-white px-4 py-1 font-semibold text-white transition-all hover:bg-white hover:text-secondary"
+          onClick={onClick}>
+          {title}
+        </button>
+      )}
     </>
   );
 };

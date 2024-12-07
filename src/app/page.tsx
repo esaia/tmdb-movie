@@ -1,4 +1,4 @@
-import { getMovies } from '@/lib/requests';
+import { getGenres, getMovies } from '@/lib/requests';
 // COMPONENTS
 import MainSlider from '@/src/components/MainSlider';
 import CategorySlider from '@/src/components/CategorySlider';
@@ -10,21 +10,21 @@ import { BiCameraMovie } from 'react-icons/bi';
 import MobMainSlider from '@/src/components/MobMainSlider';
 
 const fetchData = async () => {
-  // const taxonomies: Taxonomy[] = await getTaxonomies();
   const popularMovies = await getMovies('/movie/popular');
   const popularMoviesPageTwo = await getMovies('/movie/popular', { params: { page: 2 } });
   const topRatedMovies = await getMovies('/movie/top_rated');
+  const genres = await getGenres();
 
-  return { popularMovies, popularMoviesPageTwo, topRatedMovies };
+  return { popularMovies, popularMoviesPageTwo, topRatedMovies, genres };
 };
 
 const Home = async () => {
-  const { popularMovies, popularMoviesPageTwo, topRatedMovies } = await fetchData();
+  const { popularMovies, popularMoviesPageTwo, topRatedMovies, genres } = await fetchData();
   return (
     <div>
       <div>
         <div className="hidden lg:flex">
-          <MainSlider movies={popularMovies} />
+          <MainSlider movies={popularMovies} genres={genres} />
         </div>
 
         <div className="lg:hidden">

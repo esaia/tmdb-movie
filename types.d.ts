@@ -55,6 +55,9 @@ interface MovieType {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  genres?: { id: number; name: string }[];
+  revenue?: number;
+  budget?: number;
 }
 
 interface MovieInput {
