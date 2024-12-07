@@ -19,8 +19,7 @@ const Button = ({
           <button
             onClick={onClick}
             aria-label={title}
-            className="text relative inline-flex items-center justify-center rounded-sm border-[1px] border-secondary/40 bg-gray-900 px-3 py-2 text-white transition-all duration-200 hover:bg-primaryBlack focus:outline-none active:scale-95 active:bg-primary lg:px-8 lg:py-4"
-          >
+            className="text relative inline-flex items-center justify-center rounded-xl border-[1px] border-secondary/40 bg-secondary/50 px-3 py-2 text-white transition-all duration-200 focus:outline-none active:scale-95 active:bg-secondary lg:px-8 lg:py-4">
             {title}
           </button>
         </div>
@@ -28,11 +27,10 @@ const Button = ({
 
       {type === 2 && (
         <button
-          className="text w-full rounded-md bg-primaryBlack px-7 py-3 hover:bg-primaryBlack/70 active:bg-black"
+          className="text w-full rounded-md bg-primaryBlack px-7 py-3 hover:bg-primaryBlack/70 active:bg-secondary"
           type={handleType}
           aria-label={title}
-          onClick={onClick}
-        >
+          onClick={onClick}>
           {title}
         </button>
       )}
@@ -42,8 +40,7 @@ const Button = ({
           className="text w-full rounded-md bg-secondary px-7 py-3 hover:bg-secondary/70 active:bg-red-500"
           type={handleType}
           aria-label={title}
-          onClick={onClick}
-        >
+          onClick={onClick}>
           {title}
         </button>
       )}

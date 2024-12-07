@@ -29,24 +29,10 @@ export const searchData = async (
   return data;
 };
 
-export const getAllMovies = async (
-  params: MovieSearchParams = {
-    searchQuery: '',
-    page: '1',
-    perpage: 8,
-    taxonomy: '',
-    isGrouped: false,
-  },
-) => {
-  const { data } = await qtvBack.get(`${process.env.NEXT_PUBLIC_URL_API}/movies`, {
-    params,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST,GET  ',
-    },
-  });
+export const getMovies = async (path: string, options?: any) => {
+  const { data } = await tmdbAxios.get(path, options);
 
-  return data;
+  return data?.results;
 };
 
 export const getAllSeries = async (
@@ -139,27 +125,27 @@ export const getUser = async () => {
   return data;
 };
 
-export const getMovies = async (searchQuery?: string, page: string = '1', sort?: string, dir?: string) => {
-  const { data } = await qtvBack.get('/allMovies', {
-    params: { searchQuery, sort, dir, page },
-    headers: {
-      'content-type': 'application/json',
-    },
-  });
+// export const getMovies = async (searchQuery?: string, page: string = '1', sort?: string, dir?: string) => {
+//   const { data } = await qtvBack.get('/allMovies', {
+//     params: { searchQuery, sort, dir, page },
+//     headers: {
+//       'content-type': 'application/json',
+//     },
+//   });
 
-  return data;
-};
+//   return data;
+// };
 
-export const getSeries = async (searchQuery?: string, page: string = '1', sort?: string, dir?: string) => {
-  const { data } = await qtvBack.get('/allSeries', {
-    params: { searchQuery, sort, dir, page },
-    headers: {
-      'content-type': 'application/json',
-    },
-  });
+// export const getSeries = async (searchQuery?: string, page: string = '1', sort?: string, dir?: string) => {
+//   const { data } = await qtvBack.get('/allSeries', {
+//     params: { searchQuery, sort, dir, page },
+//     headers: {
+//       'content-type': 'application/json',
+//     },
+//   });
 
-  return data;
-};
+//   return data;
+// };
 
 export const getArchivedMovies = async (searchQuery?: string, page: string = '1', sort?: string, dir?: string) => {
   const { data } = await qtvBack.get('/archived', {

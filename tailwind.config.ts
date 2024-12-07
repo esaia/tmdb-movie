@@ -14,9 +14,9 @@ const config: Config = {
         '3xl': '1920px',
       },
       colors: {
-        primary: '#111827',
+        primary: '#1a221b',
         primaryBlack: '#0a101c',
-        secondary: '#3fc0ac',
+        secondary: '#ff0000',
         secondaryLight: '#a6fef1',
         // secondary: '#ec1044',
       },

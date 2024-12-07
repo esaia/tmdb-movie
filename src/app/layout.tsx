@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 const myFont = localFont({
-  src: '../../assets/fonts/NotoSansGeorgian-VariableFont_wdth,wght.ttf',
+  src: '../../assets/fonts/Geologica-Regular.ttf',
 });
 
 export default function RootLayout({

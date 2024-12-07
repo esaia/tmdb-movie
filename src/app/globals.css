@@ -7,7 +7,7 @@
   transition: all ease-in 0.2s;
 }
 .swiper-pagination-bullet-active {
-  background-color: #3fc0ac !important;
+  background-color: #ff0000 !important;
 }
 .uppercase {
   font-feature-settings: 'case' on;
@@ -20,7 +20,7 @@
   }
 
   .title {
-    @apply text-base md:text-lg lg:text-xl;
+    @apply text-base md:text-lg lg:text-3xl;
   }
 
   .text {
@@ -86,7 +86,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #3fc0ac;
+      background: #ff0000;
       border-radius: 10px;
     }
   }
@@ -94,7 +94,7 @@
 
 .vds-audio-layout,
 .vds-video-layout {
-  --media-brand: #3fc0ac;
+  --media-brand: #ff0000;
   --media-slider-track-fill-bg: var(--media-brand);
 }
 

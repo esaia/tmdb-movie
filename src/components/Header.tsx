@@ -31,8 +31,7 @@ const Header = () => {
         windowScrollY > 50
           ? 'border-b-secondary/40 bg-black/80 py-3 backdrop-blur-sm [&_.logo]:scale-90'
           : 'bg-transparent py-6 [&_.logo]:scale-100'
-      }`}
-    >
+      }`}>
       <div className="mainContainer top-0 m-auto hidden w-full max-w-max_width justify-between lg:flex">
         <div className="logo flex origin-left items-center justify-center transition-all duration-300">
           <Link href={'/'} className="text-xl font-bold" aria-label="Logo">
@@ -44,17 +43,17 @@ const Header = () => {
 
           <HeaderNavLink to="/">
             <RiMovie2Line />
-            <p className="py-4 text-sm">მთავარი</p>
+            <p className="py-4 text-sm">Home</p>
           </HeaderNavLink>
 
           <HeaderNavLink to="/movie">
             <MdMovieCreation />
-            <p className="py-4 text-sm">ფილმები</p>
+            <p className="py-4 text-sm">Movies</p>
           </HeaderNavLink>
 
           <HeaderNavLink to="/serie">
             <MdOutlineLocalMovies />
-            <p className="py-4 text-sm">სერიალები</p>
+            <p className="py-4 text-sm">Series</p>
           </HeaderNavLink>
         </div>
       </div>
@@ -75,8 +74,7 @@ const HeaderNavLink = ({ children, to }: { children: React.ReactNode; to: string
         className={`text flex items-center justify-center gap-2 transition-all duration-300 hover:text-secondary ${
           path === to && 'text-secondary'
         }`}
-        href={to}
-      >
+        href={to}>
         {children}
       </Link>
     </>

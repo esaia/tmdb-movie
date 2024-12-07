@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import Button from '@/src/components/UiComponents/Button';
@@ -12,14 +12,13 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import { GoDotFill } from 'react-icons/go';
 import Link from 'next/link';
 import { MovieType, Taxonomy } from '@/types';
-import { formatDuration, generateSlug } from '@/lib/helpers';
+import { generateSlug } from '@/lib/helpers';
+import { format } from 'date-fns';
 
 const MainSlider = ({ movies }: { movies: MovieType[] }) => {
   const [activeMovie, setactiveMovie] = useState<MovieType>(movies[1]);
-
   const animationDiv = useRef<HTMLDivElement | null>(null);
   const detailsRef = useRef<HTMLDivElement | null>(null);
   const backgroundImgRef = useRef<HTMLImageElement | null>(null);
@@ -82,35 +81,24 @@ const MainSlider = ({ movies }: { movies: MovieType[] }) => {
             <div className="flex w-fit max-w-[600px] flex-col gap-2 transition-all lg:gap-6" ref={detailsRef}>
               <div className="flex flex-col gap-2">
                 <div>
-                  <h2 className="title mb-1 line-clamp-2 font-bold uppercase">{activeMovie?.title_ka}</h2>
-                  <h2 className="title line-clamp-2 font-bold uppercase">{activeMovie?.title_en}</h2>
+                  <h2 className="title mb-1 line-clamp-2 font-bold uppercase">{activeMovie?.title}</h2>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <p className="text-sm">{activeMovie?.year} წელი</p>
-                  <GoDotFill className="w-2 !text-sm" />
-                  <p className="text-sm">{formatDuration(activeMovie.minutes)}</p>
-                </div>
-
-                <div className="flex items-center gap-1">
-                  {activeMovie?.genres.map(genre => (
-                    <p key={genre.id} className="rounded-md p-1 text-sm text-white/90 underline">
-                      {genre.genre}
-                    </p>
-                  ))}
-                </div>
+                {/* <div className="flex items-center gap-2">
+                  <p>{format(activeMovie.release_date, 'y')}</p>
+                </div> */}
               </div>
-              <p className="line-clamp-3 text-sm opacity-90 lg:line-clamp-4">{activeMovie.description}</p>
+              <p className="line-clamp-3 text-sm opacity-90 lg:line-clamp-4">{activeMovie?.overview}</p>
 
               <Link href={`movie/${generateSlug(activeMovie)}`}>
-                <Button title="უყურე ფილმს" />
+                <Button title="Watch now" />
               </Link>
             </div>
           )}
         </div>
 
         <div className="flex h-full max-w-[100%] flex-1 flex-col justify-between lg:max-w-[50%]">
-          <h3 className="mainContainer title py-3 uppercase lg:px-5">პოპულალური</h3>
+          <h3 className="mainContainer title py-4 uppercase lg:px-5">Popular</h3>
           <SliderSwiper
             activeMovie={activeMovie}
             setactiveMovie={setactiveMovie}
@@ -129,8 +117,8 @@ const MainSlider = ({ movies }: { movies: MovieType[] }) => {
 
       {activeMovie && (
         <Image
-          alt={activeMovie.title_ka}
-          src={`${process.env.NEXT_PUBLIC_URL}/storage/${activeMovie.cover_image}`}
+          alt={activeMovie.title}
+          src={`https://image.tmdb.org/t/p/original/${activeMovie?.backdrop_path}`}
           width={1920}
           height={1080}
           ref={backgroundImgRef}
@@ -231,18 +219,20 @@ const SliderSwiper = ({
               } `}>
               <div className="flex h-full flex-col">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_URL}/storage/${slide.poster_image}`}
+                  src={`https://image.tmdb.org/t/p/original/${slide?.poster_path}`}
                   alt="cover image"
                   width={200}
                   height={400}
-                  className="!h-[230px] w-full rounded-sm object-cover sm:!h-[270px] lg:!h-[330px]"
+                  className="!h-[230px] w-full rounded-lg object-cover sm:!h-[270px] lg:!h-[330px]"
                   priority={true}
                 />
                 <div
-                  className={`h-14 border-b border-b-transparent px-1 py-2 transition-all duration-300 ${
+                  className={`flex h-14 items-center justify-center border-b border-b-transparent px-1 py-2 transition-all duration-300 ${
                     activeMovie && activeMovie.id === slide.id && '!border-b-secondary'
                   } `}>
-                  <p className={`smtext line-clamp-2 text-center font-bold uppercase`}>{slide?.title_ka}</p>
+                  <p className="mt-1 line-clamp-1 text-sm font-bold transition-all group-hover:text-secondary lg:text-lg">
+                    {slide?.title}
+                  </p>
                 </div>
               </div>
             </SwiperSlide>

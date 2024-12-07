@@ -1,6 +1,4 @@
-export const revalidate = 1;
-
-import { getAllMovies, getTaxonomies } from '@/lib/requests';
+import { getMovies } from '@/lib/requests';
 // COMPONENTS
 import MainSlider from '@/src/components/MainSlider';
 import CategorySlider from '@/src/components/CategorySlider';
@@ -9,76 +7,38 @@ import ContinueWatching from '@/src/components/ContinueWatching';
 
 // ICONS
 import { BiCameraMovie } from 'react-icons/bi';
-import { MovieType, Taxonomy } from '@/types';
 import MobMainSlider from '@/src/components/MobMainSlider';
 
 const fetchData = async () => {
-  const taxonomies: Taxonomy[] = await getTaxonomies();
-  const taxonomyMoviesArray: { data: MovieType[]; taxonomy: string }[] = await getAllMovies({ isGrouped: true });
+  // const taxonomies: Taxonomy[] = await getTaxonomies();
+  const popularMovies = await getMovies('/movie/popular');
+  const popularMoviesPageTwo = await getMovies('/movie/popular', { params: { page: 2 } });
+  const topRatedMovies = await getMovies('/movie/top_rated');
 
-  return { taxonomies, taxonomyMoviesArray };
+  return { popularMovies, popularMoviesPageTwo, topRatedMovies };
 };
 
 const Home = async () => {
-  const { taxonomies, taxonomyMoviesArray } = await fetchData();
-
+  const { popularMovies, popularMoviesPageTwo, topRatedMovies } = await fetchData();
   return (
     <div>
-      <>
-        <div>
-          <div className="hidden lg:flex">
-            {taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === 'trending') && (
-              <MainSlider
-                movies={
-                  taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === 'trending')?.data as MovieType[]
-                }
-              />
-            )}
-          </div>
-
-          <div className="lg:hidden">
-            {taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === 'trending') && (
-              <MobMainSlider
-                movies={
-                  taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === 'trending')?.data as MovieType[]
-                }
-              />
-            )}
-          </div>
+      <div>
+        <div className="hidden lg:flex">
+          <MainSlider movies={popularMovies} />
         </div>
 
-        <ContinueWatching />
+        <div className="lg:hidden">
+          <MobMainSlider movies={popularMovies.slice(0, 8)} />
+        </div>
+      </div>
 
-        {taxonomies
-          .filter(taxonomy => !['trending', 'coming_soon'].includes(taxonomy?.slug))
-          .sort((a, b) => {
-            return -1;
-          })
-          .map(taxonomy => {
-            return (
-              taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === taxonomy?.slug)?.data && (
-                <CategorySlider
-                  movies={
-                    taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === taxonomy?.slug)
-                      ?.data as MovieType[]
-                  }
-                  categoryTitle={taxonomy.name}
-                  icon={<BiCameraMovie />}
-                />
-              )
-            );
-          })}
+      {/* <ContinueWatching /> */}
 
-        {taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === 'coming_soon')?.data?.length ? (
-          <ComingSoon
-            movies={
-              taxonomyMoviesArray.find(taxonomyMovie => taxonomyMovie.taxonomy === 'coming_soon')?.data as MovieType[]
-            }
-          />
-        ) : (
-          <></>
-        )}
-      </>
+      <CategorySlider movies={popularMovies} categoryTitle={'Popular'} icon={<BiCameraMovie />} />
+      <CategorySlider movies={popularMoviesPageTwo} categoryTitle={'Trending Movies'} icon={<BiCameraMovie />} />
+      <CategorySlider movies={topRatedMovies} categoryTitle={'Top Rated'} icon={<BiCameraMovie />} />
+
+      <ComingSoon movies={popularMovies} />
     </div>
   );
 };

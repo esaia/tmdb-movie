@@ -77,12 +77,11 @@ const MobHeader = () => {
       <div
         className={`flex items-center justify-between border-b-[1px] border-transparent bg-black px-5 py-4 transition-all duration-500 ${
           windowScrollY > 50 || showMenu ? 'border-b-secondary/40 bg-black' : 'bg-transparent'
-        }`}
-      >
+        }`}>
         <div className="cursor-pointer rounded-full p-3 text-xl hover:bg-gray-800" onClick={() => setShowSearch(true)}>
           <FaSearch />
         </div>
-        <Link href={'/'} aria-label="Logo">
+        <Link href={'/'} aria-label="Logo" className="[&_p]:!text-center">
           <Logo />
         </Link>
         <div className="cursor-pointer rounded-full p-3 text-xl hover:bg-gray-800" onClick={toogleMobileMenu}>
@@ -92,8 +91,7 @@ const MobHeader = () => {
 
       {/* {showSearch && ( */}
       <div
-        className={`absolute left-0 top-0 z-50 w-full scale-y-0 px-3 pt-[7px] ${hasMounted ? (showSearch ? 'scaleIn' : 'scaleOut') : ''}`}
-      >
+        className={`absolute left-0 top-0 z-50 w-full scale-y-0 px-3 pt-[7px] ${hasMounted ? (showSearch ? 'scaleIn' : 'scaleOut') : ''}`}>
         <HeaderSearch onClose={() => setShowSearch(false)} />
       </div>
       {/* )} */}
@@ -101,25 +99,22 @@ const MobHeader = () => {
       <div
         className="absolute left-0 top-[77px] w-full origin-top scale-0 bg-primaryBlack p-3 uppercase"
         ref={mobileMenuRef}
-        onClick={e => e.stopPropagation()}
-      >
+        onClick={e => e.stopPropagation()}>
         <Link
           className={`text flex items-center gap-2 px-4 py-6 hover:text-secondary ${path === '/' && 'text-secondary'}`}
           onClick={closeMenu}
-          href={'/'}
-        >
+          href={'/'}>
           <RiMovie2Line />
-          მთავარი
+          Home
         </Link>
         <Link
           className={`text flex items-center gap-2 px-4 py-6 hover:text-secondary ${
             path === '/movie' && 'text-secondary'
           }`}
           onClick={closeMenu}
-          href={'/movie'}
-        >
+          href={'/movie'}>
           <MdMovieCreation />
-          ფილმები
+          Movies
         </Link>
 
         <Link
@@ -127,10 +122,9 @@ const MobHeader = () => {
             path === '/serie' && 'text-secondary'
           }`}
           onClick={closeMenu}
-          href={'/serie'}
-        >
+          href={'/serie'}>
           <MdOutlineLocalMovies />
-          სერიალები
+          Series
         </Link>
       </div>
     </div>

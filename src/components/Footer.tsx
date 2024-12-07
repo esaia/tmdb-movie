@@ -1,6 +1,5 @@
 import React from 'react';
 import Logo from '@/src/components/UiComponents/SVG/Logo';
-import { MdOutlineCopyright } from 'react-icons/md';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -15,22 +14,22 @@ const Footer = () => {
           <ul className="flex flex-wrap items-center text-sm font-medium uppercase text-gray-400 sm:mb-0">
             <li>
               <Link href="/" className="me-4 hover:underline md:me-6">
-                მთავარი
+                Home
               </Link>
             </li>
             <li>
               <Link href="/movie" className="me-4 hover:underline md:me-6">
-                ფილმები{' '}
+                Movies{' '}
               </Link>
             </li>
             <li>
               <Link href="/serie" className="me-4 hover:underline md:me-6">
-                სერიალები
+                Series
               </Link>
             </li>
             <li>
               <Link href="#" className="hover:underline">
-                ჩვენს შესახებ
+                About Us
               </Link>
             </li>
           </ul>
@@ -38,7 +37,7 @@ const Footer = () => {
         <hr className="my-6 border-gray-700 sm:mx-auto lg:my-8" />
 
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <span className="block text-sm text-gray-400 sm:text-center">© 2023 ქრისტიანული ფილმები </span>
+          <span className="block text-sm text-gray-400 sm:text-center">© 2023 TMDB Movies </span>
           <span className="text-gray-400">
             Created With 🤍 By{' '}
             <Link href={'https://www.facebook.com/esaia.gafrindashvili/'} target="_blank">

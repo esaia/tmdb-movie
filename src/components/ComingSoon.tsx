@@ -121,8 +121,8 @@ const ComingSoon = ({ movies }: { movies: MovieType[] }) => {
       <div
         className="absolute left-0 top-0 h-full w-full bg-cover bg-center bg-no-repeat transition-opacity duration-700 md:bg-fixed"
         style={{
-          backgroundImage: `url(${process.env.NEXT_PUBLIC_URL}/storage/${activeMovie.cover_image})   `,
-          opacity: backgroundOpacity,
+          opacity: 1,
+          backgroundImage: `url(https://image.tmdb.org/t/p/original/${activeMovie.backdrop_path})`,
         }}
       />
 
@@ -134,7 +134,7 @@ const ComingSoon = ({ movies }: { movies: MovieType[] }) => {
             <LuPopcorn />
           </div>
 
-          <h3 className="title relative py-4 uppercase">მალე</h3>
+          <h3 className="title relative py-4 font-bold uppercase">Soon</h3>
         </div>
 
         <Swiper
@@ -148,8 +148,7 @@ const ComingSoon = ({ movies }: { movies: MovieType[] }) => {
           centeredSlides={true}
           grabCursor={true}
           onSwiper={swiper => onSwiper(swiper)}
-          onSlideChange={swiper => onSlideChange(swiper)}
-        >
+          onSlideChange={swiper => onSlideChange(swiper)}>
           {movies.map(movie => {
             return (
               <SwiperSlide className="!h-ful !duration-600 pb-10 opacity-50 !transition-all" key={movie.id}>
@@ -158,13 +157,15 @@ const ComingSoon = ({ movies }: { movies: MovieType[] }) => {
                     <Image
                       width={200}
                       height={400}
-                      src={`${process.env.NEXT_PUBLIC_URL}/storage/${movie.poster_image}`}
-                      alt={movie.title_ka}
+                      src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                      alt={movie.title}
                       className="h-[200px] w-full flex-1 rounded-sm object-cover md:h-[400px] lg:h-[500px]"
                     />
                   </div>
 
-                  <p className="text line-clamp-2 px-1 pt-2 text-left">{movie.title_ka}</p>
+                  <p className="mt-3 line-clamp-2 text-sm font-bold transition-all group-hover:text-secondary lg:line-clamp-1 lg:text-lg">
+                    {movie.title}
+                  </p>
                 </div>
               </SwiperSlide>
             );
@@ -172,15 +173,13 @@ const ComingSoon = ({ movies }: { movies: MovieType[] }) => {
 
           <div
             className="navigationPrev absolute -left-3 top-[50%] z-20 translate-y-[-50%] cursor-pointer"
-            onClick={() => commingSoonSwiper?.slidePrev()}
-          >
+            onClick={() => commingSoonSwiper?.slidePrev()}>
             <MdKeyboardArrowLeft className="h-16 w-16 text-gray-200 hover:text-white" />
           </div>
 
           <div
             className="navigationNext absolute right-0 top-[50%] z-20 translate-y-[-50%] cursor-pointer"
-            onClick={() => commingSoonSwiper?.slideNext()}
-          >
+            onClick={() => commingSoonSwiper?.slideNext()}>
             <MdKeyboardArrowRight className="h-16 w-16 text-gray-200 hover:text-white" />
           </div>
         </Swiper>

@@ -15,5 +15,6 @@ export const tmdbAxios = axios.create({
   headers: {
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_TBDB_API}`,
     Accept: 'application/json',
+    // 'Access-Control-Allow-Origin': '*',
   },
 });

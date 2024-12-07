@@ -23,7 +23,7 @@ const CategorySlider = ({
         <div className="mainContainer wrapper m-auto flex max-w-max_width flex-col gap-5 py-5 transition-all duration-500 lg:py-10">
           <div className="flex items-center gap-3">
             <div className="title rounded-full bg-secondary p-2 lg:p-3">{icon}</div>
-            <h3 className="title uppercase">{categoryTitle}</h3>
+            <h3 className="title font-bold uppercase">{categoryTitle}</h3>
           </div>
 
           <Swiper
@@ -36,11 +36,10 @@ const CategorySlider = ({
               return (
                 <SwiperSlide
                   key={movie.id}
-                  className="!w-[160px] cursor-pointer pr-2 sm:!w-[180px] lg:!w-[240px] lg:pr-3"
-                >
-                  <Link href={`${movie?.serie_urls ? '/serie' : '/movie'}/${generateSlug(movie)}`}>
-                    <MovieCard movie={movie} />
-                  </Link>
+                  className="!w-[160px] cursor-pointer pr-2 sm:!w-[180px] lg:!w-[240px] lg:pr-3">
+                  {/* <Link href={`${movie?.serie_urls ? '/serie' : '/movie'}/${generateSlug(movie)}`}> */}
+                  <MovieCard movie={movie} />
+                  {/* </Link> */}
                 </SwiperSlide>
               );
             })}

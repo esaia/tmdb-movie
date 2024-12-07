@@ -41,26 +41,20 @@ interface paginationSerie {
 }
 
 interface MovieType {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
   id: number;
-  title_ka: string;
-  title_en: string;
-  year: number;
-  director: string;
-  description: string;
-  imdb: string;
-  poster_image: string;
-  cover_image: string;
-  country: string;
-  minutes: string;
-  tmdb_id: number;
-  movie_url: string;
-  serie_urls?: serieUrl[];
-
-  status: boolean;
-  genres: Genre[];
-  taxonomy: Taxonomy[];
-  created_at: string;
-  updated_at: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
 }
 
 interface MovieInput {

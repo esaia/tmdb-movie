@@ -1,7 +1,7 @@
 import { continueWatchingType, MovieType } from '@/types';
 
-export const generateSlug = (movie: MovieType | continueWatchingType) => {
-  const titleSlug = movie.title_en
+export const generateSlug = (movie: MovieType) => {
+  const titleSlug = movie?.title
     .toString()
     .trim()
     .toLowerCase()

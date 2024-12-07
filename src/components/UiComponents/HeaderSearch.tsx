@@ -49,13 +49,12 @@ const HeaderSearch = ({ onClose }: { onClose?: () => void }) => {
   return (
     <div
       className={`customScrollbar relative z-40 w-full rounded-lg border-[1px] border-primary bg-primaryBlack p-3 transition-all duration-500 ease-out lg:w-[300px] ${isInputFocused ? 'border-secondary 2xl:w-[560px]' : '2xl:w-[500px]'}`}
-      ref={searchMovieTarget}
-    >
+      ref={searchMovieTarget}>
       <div className="flex items-center">
         <input
           type="text"
           name="search"
-          placeholder="მოძებნე ფილმი"
+          placeholder="Search movie"
           className="w-full bg-transparent outline-none placeholder:text-xs"
           onFocus={() => setIsInputFocused(true)}
           onChange={e => {
@@ -82,8 +81,7 @@ const HeaderSearch = ({ onClose }: { onClose?: () => void }) => {
             <>
               <div
                 className="md:max-w-10/12 absolute right-[50%] top-[calc(100%+5px)] flex h-fit max-h-[60vh] w-full min-w-[200px] max-w-max_width translate-x-[50%] flex-col items-start justify-start gap-3 overflow-auto rounded-lg border-[1px] border-secondary/50 bg-primaryBlack p-4 transition-all md:w-full lg:top-[calc(100%+20px)]"
-                onClick={e => e.stopPropagation()}
-              >
+                onClick={e => e.stopPropagation()}>
                 {searchedMovies.length === 0 ? (
                   <p>ფილმი არ მოიძებნა</p>
                 ) : (
@@ -97,8 +95,7 @@ const HeaderSearch = ({ onClose }: { onClose?: () => void }) => {
                           setsearchQuery('');
                         }}
                         className="animate-fadIn flex w-full cursor-pointer gap-3 rounded-sm transition-colors hover:bg-gray-900"
-                        key={movie?.id}
-                      >
+                        key={movie?.id}>
                         <Image
                           src={`${process.env.NEXT_PUBLIC_URL}/storage/${movie?.cover_image}`}
                           width={400}
