@@ -59,8 +59,8 @@ Follow the steps below to get your development environment up and running.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/tmdb-movie-app.git
-cd tmdb-movie-app
+git clone https://github.com/esaia/tmdb-movie
+cd tmdb-movie
 
 npm install
 # or
