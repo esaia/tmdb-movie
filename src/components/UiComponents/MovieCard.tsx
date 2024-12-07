@@ -19,8 +19,8 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
             }
             alt={movie.title}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            width={720}
-            height={1280}
+            width={300}
+            height={450}
             priority={true}
           />
 

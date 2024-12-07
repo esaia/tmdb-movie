@@ -27,8 +27,8 @@ const VideoPlayer = ({ movie }: { movie: MovieType }) => {
         <div className="gap- bg-red-30 absolute left-1/2 top-0 flex h-full max-h-max w-full -translate-x-1/2 items-center gap-5">
           <Image
             src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : '/images/poster.jpg'}
-            width={1080}
-            height={1920}
+            width={300}
+            height={450}
             alt={movie.title}
             className="hidden aspect-2/3 h-full w-fit cursor-pointer rounded-lg object-cover lg:block"
           />
