@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-pagination-bullet {
+  background-color: white !important;
+  transition: all ease-in 0.2s;
+}
+.swiper-pagination-bullet-active {
+  background-color: #3fc0ac !important;
+}
+.uppercase {
+  font-feature-settings: 'case' on;
+  text-transform: uppercase;
+}
+
+@layer components {
+  .mainContainer {
+    @apply px-4 md:px-10 lg:px-12 xl:px-28;
+  }
+
+  .title {
+    @apply text-base md:text-lg lg:text-xl;
+  }
+
+  .text {
+    @apply text-xs sm:text-sm lg:text-base;
+  }
+
+  .smtext {
+    @apply text-xs sm:text-xs lg:text-sm;
+  }
+
+  .scaleIn {
+    animation: scaleIn ease-in-out 0.2s forwards;
+  }
+
+  .scaleOut {
+    animation: scaleOut ease-in-out 0.2s forwards;
+  }
+  .fadeIn {
+    animation: fadeIn ease-out 0.2s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes scaleOut {
+    from {
+      transform: scaleY(1);
+    }
+    to {
+      transform: scaleY(0);
+    }
+  }
+
+  .customScrollbar {
+    ::-webkit-scrollbar {
+      width: 3px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      border-radius: 99px;
+      width: 1px;
+      background-color: #111827;
+      opacity: 0.1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3fc0ac;
+      border-radius: 10px;
+    }
+  }
+}
+
+.vds-audio-layout,
+.vds-video-layout {
+  --media-brand: #3fc0ac;
+  --media-slider-track-fill-bg: var(--media-brand);
+}
+
+div[data-media-provider=''] video {
+  height: 100% !important;
+}

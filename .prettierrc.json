@@ -1,0 +1,21 @@
+{
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "singleQuote": true,
+  "trailingComma": "all",
+  "jsxBracketSameLine": true,
+  "arrowParens": "avoid",
+  "proseWrap": "preserve",
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": "*.js",
+      "options": {
+        "parser": "babel",
+        "semi": true,
+        "bracketSpacing": true,
+        "singleQuote": true,
+        "jsxBracketSameLine": false
+      }
+    }
+  ]
+}
