@@ -14,8 +14,8 @@ const MovieDetail = ({ movie }: { movie: MovieType }) => {
       <div className="mainContainer z-20 m-auto flex max-w-max_width flex-col gap-10 lg:flex-row">
         <Image
           src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-          width={1080}
-          height={1920}
+          width={300}
+          height={450}
           alt={movie.title}
           className="z-20 aspect-2/3 w-40 max-w-60 cursor-pointer rounded-lg object-cover transition-all duration-500 hover:scale-110 lg:hidden lg:w-64"
         />

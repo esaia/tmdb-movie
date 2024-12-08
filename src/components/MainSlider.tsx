@@ -20,61 +20,12 @@ const MainSlider = ({ movies, genres }: { movies: MovieType[]; genres: { id: num
   const [activeMovie, setactiveMovie] = useState<MovieType>(movies[1]);
   const animationDiv = useRef<HTMLDivElement | null>(null);
   const detailsRef = useRef<HTMLDivElement | null>(null);
-  const backgroundImgRef = useRef<HTMLImageElement | null>(null);
-
-  const timeoutRef = useRef<number | null>(null);
-  const [count, setCount] = useState(0);
-  const isMountingRef = useRef(false);
 
   const [isAnimating, setisAnimating] = useState(false);
 
   const activeMovieGenres = useMemo(() => {
     return genres.filter((genre: any) => activeMovie.genre_ids.includes(genre?.id));
   }, [activeMovie]);
-
-  useEffect(() => {
-    setCount(count => count + 1);
-    if (count === 2) {
-      isMountingRef.current = true;
-    }
-  }, [isAnimating]);
-
-  useEffect(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    if (!isMountingRef.current) return;
-
-    if (!backgroundImgRef.current || !detailsRef.current || !animationDiv.current || !activeMovie) return;
-    //  rotate(3deg) scale(1.8)
-    animationDiv.current.style.transition = 'all cubic-bezier(0.51,-0.2, 0.09, 0.79) 0.2s';
-    animationDiv.current.style.transform = 'translateY(-10%) rotate(3deg) scale(1.4)';
-
-    backgroundImgRef.current.style.transition = 'all cubic-bezier(0.51,-0.2, 0.09, 0.79) 0.4s 0.02s';
-    backgroundImgRef.current.style.opacity = '0.5';
-    backgroundImgRef.current.style.transform = 'translateY(30px)';
-
-    detailsRef.current.style.transition = 'all cubic-bezier(0.51,-0.2, 0.09, 0.79) 0s';
-    detailsRef.current.style.opacity = '0';
-
-    // detailsRef.current.style.transform = 'translateY(3px)';
-
-    // rotate(1deg) scale(1.8)
-    timeoutRef.current = window.setTimeout(() => {
-      if (!animationDiv.current || !backgroundImgRef.current || !detailsRef.current) return;
-      animationDiv.current.style.transition = 'all cubic-bezier(0.51,-0.2, 0.09, 0.79) 2s';
-      animationDiv.current.style.transform = 'translateY(-130%) rotate(1deg) scale(1.4)';
-
-      backgroundImgRef.current.style.opacity = '1';
-      backgroundImgRef.current.style.transition = 'all cubic-bezier(0.51,-0.2, 0.09, 0.79) 3s .2s';
-      backgroundImgRef.current.style.transform = 'translateY(0px)';
-
-      detailsRef.current.style.transition = 'all cubic-bezier(0.51,-0.2, 0.09, 0.79) 2s .5s';
-      detailsRef.current.style.opacity = '1';
-      // detailsRef.current.style.transform = 'translateY(0px)';
-    }, 200);
-  }, [isAnimating]);
 
   return (
     <div className="relative flex w-full flex-col justify-start overflow-hidden transition-all duration-500 md:h-[900px]">
@@ -131,17 +82,20 @@ const MainSlider = ({ movies, genres }: { movies: MovieType[]; genres: { id: num
       />
       <div className="absolute bottom-0 left-0 z-[3] h-[120%] w-full scale-110 bg-gradient-to-b from-black/60 via-gray-950/70 to-black" />
 
-      {activeMovie && (
-        <Image
-          alt={activeMovie.title}
-          src={`https://image.tmdb.org/t/p/original/${activeMovie?.backdrop_path}`}
-          width={500}
-          height={400}
-          ref={backgroundImgRef}
-          priority={true}
-          className="absolute left-0 top-0 z-[2] h-[98%] w-full object-cover object-center transition-all duration-300"
-        />
-      )}
+      {activeMovie &&
+        movies.map(movie => {
+          return (
+            <Image
+              key={movie.id}
+              alt={movie.title}
+              src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+              width={500}
+              height={400}
+              priority={true}
+              className={`absolute left-0 top-0 z-[2] h-[98%] w-full object-cover object-center opacity-0 transition-all duration-300 ${activeMovie.id === movie.id && 'opacity-100'} `}
+            />
+          );
+        })}
     </div>
   );
 };
