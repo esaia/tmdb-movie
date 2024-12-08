@@ -89,8 +89,8 @@ const MainSlider = ({ movies, genres }: { movies: MovieType[]; genres: { id: num
               key={movie.id}
               alt={movie.title}
               src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-              width={500}
-              height={400}
+              width={800}
+              height={500}
               priority={true}
               className={`absolute left-0 top-0 z-[2] h-[98%] w-full object-cover object-center opacity-0 transition-all duration-300 ${activeMovie.id === movie.id && 'opacity-100'} `}
             />

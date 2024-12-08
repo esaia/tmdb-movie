@@ -1,13 +1,10 @@
 'use client';
 
-import { generateSlug } from '@/lib/helpers';
 import { getMovies } from '@/lib/requests';
 import Button from '@/src/components/UiComponents/Button';
 import Loading from '@/src/components/UiComponents/Loading';
 import MovieCard from '@/src/components/UiComponents/MovieCard';
 import { MovieType } from '@/types';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useState } from 'react';
 
 const Page = () => {
@@ -42,7 +39,7 @@ const MoviesList = () => {
 
   return (
     <div className="mainContainer relative m-auto min-h-svh max-w-max_width pt-24 lg:pt-40">
-      {loading ? (
+      {loading && page === 1 ? (
         <div className="flex h-fit items-start justify-center">
           <Loading />
         </div>
